@@ -5,7 +5,6 @@ const Op = db.Sequelize.Op;
 function createCondition(filtrCondition, filtrColumn, filtrValue) {
   let whereCondition = null
   if (filtrColumn == 'date') {
-    let whereCondition
     switch (filtrCondition) {
       case "equals":
         console.log(1)
@@ -26,7 +25,7 @@ function createCondition(filtrCondition, filtrColumn, filtrValue) {
         whereCondition = {title: {[Op.eq]: filtrValue}}
         break    
       case "contains": 
-        whereCondition = {title: {[Op.substring]: filtrValue}}
+        whereCondition = {title: {[Op.iLike]: `%${filtrValue}%`}}
         break
     }    
   }
